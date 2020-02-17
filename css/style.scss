@@ -1,0 +1,720 @@
+@charset "utf-8";
+
+html {
+  font-size: 62.5%;
+}
+
+@mixin fontsize($size: 24) {
+  font-size: $size + px;
+  font-size: ($size / 10) * 1rem;
+}
+
+body {
+  font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+  font-size: 1.4rem;
+  line-height: 1.6;
+  letter-spacing: .1em;
+  color: #000;
+  background-color: #FFFAF0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+header {
+
+  @media (min-width: 550px) {
+    padding-top: 15px;
+    background-color: #fff;
+    .sp-navi {
+      display: none;
+    }
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    h1 {
+      margin: 0;
+      width: 60%;
+      padding-left: 50px;
+      a {
+        color: #000;
+      }
+    }
+    .pc-navi {
+      width: 40%;
+      padding-right: 50px;
+      ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        li a {
+          color: #000;
+          &:hover {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+
+  }
+
+  @media (max-width: 549px) {
+    .pc-navi {
+      display: none;
+    }
+    h1 {
+      margin: 0;
+      position: fixed;
+      top: 0;
+      padding-top: 15px;
+      width: 100%;
+      text-align: center;
+      background-color: #fff;
+      a {
+        color: #000;
+      }
+    }
+  }
+
+}
+
+//humberger menuのはじまり------------------------------------------------------
+/*3本線の表示*/
+
+header .humberger-wrap {
+  display: block;
+}
+
+/*3本線の位置*/
+
+header .humberger-wrap {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  z-index: 10;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+}
+
+/*humberger-border1,2,3の線*/
+
+header .humberger-wrap [class*=humberger-border] {
+  position: absolute;
+  width: 40px;
+  height: 2px;
+  transition: .4s all ease;
+  transform-origin: center center;
+  background: #000;
+  /*ハンバーガーメニューの色*/
+}
+
+/*1本目の線*/
+
+header .humberger-wrap .humberger-border-1 {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+}
+
+/*2本目の線*/
+
+header .humberger-wrap .humberger-border-2 {
+  position: fixed;
+  top: 35px;
+  right: 25px;
+}
+
+/*3本目の線*/
+
+header .humberger-wrap .humberger-border-3 {
+  position: fixed;
+  top: 45px;
+  right: 25px;
+}
+
+/*開閉ボタンopen時の横線1本目*/
+
+header .humberger-wrap.opened .humberger-border-1 {
+  top: 35px;
+  transform: rotate(45deg);
+}
+
+/*開閉ボタンopen時の横線2本目*/
+
+header .humberger-wrap.opened .humberger-border-2 {
+  top: 35px;
+  transform: rotate(-45deg);
+}
+
+/*開閉ボタンopen時の横線3本目*/
+
+header .humberger-wrap.opened .humberger-border-3 {
+  top: 35px;
+  transform: rotate(-45deg);
+  opacity: 0;
+}
+
+/*メニューを非表示*/
+
+header nav {
+  display: none;
+}
+
+/*open時に一番上のヘッダーの背景色を変化*/
+
+header.opened {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+header.opened nav {
+  display: block;
+  min-height: 100vh;
+  opacity: 1;
+  top: 20px;
+}
+
+header nav ul {
+  width: 80%;
+  margin: 0 auto;
+  padding: 0;
+  padding-top: 100px;
+}
+
+header nav ul.header-navigation {
+  flex-flow: column nowrap;
+}
+
+
+
+header nav ul.header-navigation li a {
+  line-height: 3;
+  display: block;
+  text-align: center;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  color: #000;
+  border-bottom: 1px solid #000;
+  @include fontsize(20)
+}
+
+//humberger menuのおわり--------------------------------------------------------
+article {
+
+  #cover {
+    img {
+      height: 100vh;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    @media (max-width: 549px) {
+      img {
+        object-position: 30% 100%
+      }
+    }
+
+  }
+
+  #about {
+    padding: 50px 50px 0 50px;
+    h2 {
+      margin: 0;
+      text-align: center;
+      background: linear-gradient(transparent 50%, yellow 50%);
+    }
+    .about-box {
+      padding-top: 25px;
+      p {
+        line-height: 2;
+      }
+    }
+
+
+    @media (min-width: 550px) {
+      padding-top: 100px;
+      h2 {
+        width: 50%;
+        margin: 0 auto;
+        background: linear-gradient(transparent 50%, yellow 50%);
+      }
+      .about-box {
+        text-align: center;
+        p {
+          line-height: 3;
+        }
+        span:before {
+          content: "\A";
+          white-space: pre;
+          /* ←あわせてこれを指定しないと改行しない場合がある */
+        }
+      }
+    }
+
+  }
+
+  #newitem {
+    padding: 50px 50px 0 50px;
+    h2 {
+      margin: 0;
+      text-align: center;
+      background: linear-gradient(transparent 50%, yellow 50%);
+    }
+    .newitem-box {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      .newitem-box-inner {
+        padding-top: 25px;
+        img {
+          width: 100%;
+          border-radius: 4px;
+        }
+        a:hover {
+          opacity: 0.8;
+        }
+        p {
+          text-align: center;
+        }
+      }
+    }
+
+    @media (min-width: 550px) {
+      padding-top: 100px;
+      h2 {
+        width: 50%;
+        margin: 0 auto;
+        margin-bottom: 25px;
+      }
+      .newitem-box {
+        padding: 0 10%;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        .newitem-box-inner {
+          padding-top: 25px;
+          box-sizing: border-box;
+          width: 48%;
+          text-align: center;
+          img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+          }
+        }
+      }
+    }
+
+  }
+
+  #item {
+    padding: 50px 50px 0 50px;
+    h2 {
+      margin: 0;
+      text-align: center;
+      background: linear-gradient(transparent 50%, yellow 50%);
+    }
+    .item-box {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      .item-box-inner {
+        padding-top: 25px;
+        img {
+          width: 100%;
+          border-radius: 4px;
+        }
+        a:hover {
+          opacity: 0.8;
+        }
+        p {
+          text-align: center;
+        }
+      }
+    }
+    .btn {
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 25px;
+      border: 1px solid #000;
+      &:hover {
+        background-color: #fff;
+      }
+      a {
+        display: block;
+        color: #000;
+
+      }
+    }
+
+    @media (min-width: 550px) {
+      padding-top: 100px;
+      h2 {
+        width: 50%;
+        margin: 0 auto;
+        margin-bottom: 25px;
+      }
+      .item-box {
+        padding-bottom: 25px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        .item-box-inner {
+          padding-top: 25px;
+          box-sizing: border-box;
+          width: 30%;
+          text-align: center;
+          img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+          }
+        }
+      }
+      .btn {
+        text-align: center;
+        padding: 15px;
+        margin: 0 auto;
+        width: 30%;
+        border: 1px solid #000;
+        a {
+          color: #000;
+        }
+      }
+    }
+
+  }
+
+  #news {
+    padding: 50px 50px 0 50px;
+    position: relative;
+    h2 {
+      margin: 0;
+      text-align: center;
+      background: linear-gradient(transparent 50%, yellow 50%);
+    }
+    .news-box {
+      padding-top: 25px;
+      ul {
+        padding: 0;
+        margin: 0;
+        border-radius: 4px;
+        li {
+          border-bottom: 1px dotted;
+          span:before {
+            content: "\A";
+            white-space: pre;
+            /* ←あわせてこれを指定しないと改行しない場合がある */
+          }
+          a {
+            color: #000;
+            &:hover {
+              opacity: 0.5;
+            }
+          }
+        }
+      }
+    }
+    .btn {
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 25px;
+      border: 1px solid #000;
+      &:hover {
+        background-color: #fff;
+      }
+      a {
+        display: block;
+        color: #000;
+      }
+    }
+
+    @media (min-width: 550px) {
+      padding-top: 100px;
+      h2 {
+        width: 50%;
+        margin: 0 auto;
+        margin-bottom: 25px;
+      }
+      .news-box {
+        text-align: left;
+        width: 50%;
+        margin: 0 auto;
+        ul li {
+          padding-left: 20px;
+        }
+      }
+      .btn {
+        text-align: center;
+        padding: 15px;
+        margin: 0 auto;
+        margin-top: 25px;
+        width: 30%;
+        border: 1px solid #000;
+        a {
+          color: #000;
+        }
+      }
+    }
+
+  }
+
+}
+
+footer {
+  padding: 50px 50px;
+
+  h2 {
+    text-align: center;
+    margin: 0;
+    background: linear-gradient(transparent 50%, yellow 50%);
+  }
+
+  @media (min-width: 550px) {
+    h2 {
+      width: 50%;
+      margin: 0 auto;
+      margin-bottom: 25px;
+    }
+  }
+
+  .footer-box {
+    .box-left {
+      padding: 10px;
+      margin-top: 25px;
+      background-color: #fff;
+      border-radius: 4px;
+      h4 {
+        text-align: center;
+      }
+    }
+    .box-right {
+      padding: 10px;
+      margin-top: 25px;
+      background-color: #fff;
+      border-radius: 4px;
+      h4 {
+        text-align: center;
+      }
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  @media (min-width: 550px) {
+    padding-top: 100px;
+    .footer-box {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 10%;
+      .box-left {
+        width: 48%;
+        box-sizing: border-box;
+        padding: 20px;
+      }
+      .box-right {
+        width: 48%;
+        box-sizing: border-box;
+        padding: 20px;
+      }
+    }
+  }
+
+  .sns-box {
+    text-align: center;
+    padding-top: 25px;
+    ul {
+      padding: 0;
+      margin: 0;
+      li a {
+        margin: 0 20px;
+        color: #000;
+        @include fontsize(40)
+      }
+    }
+
+    @media (min-width: 550px) {
+      padding: 50px 100px 0 100px;
+      text-align: center;
+      ul li a {
+        margin: 0 20px;
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+
+  .nav-box {
+    padding-bottom: 25px;
+    ul {
+      padding: 0;
+      margin: 0;
+      margin-left: -50px;
+      margin-right: -50px;
+      text-align: center;
+      li {
+        border-bottom: 1px solid #000;
+        padding: 10px 50px;
+        a {
+          color: #000;
+          &:hover {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+  }
+
+  @media (min-width: 550px) {
+    .nav-box {
+      padding: 50px 0;
+      ul {
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0 100px;
+        li {
+          border-bottom: none;
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  .copy-box {
+    text-align: center;
+    p {
+      margin: 0;
+    }
+  }
+
+}
+
+//------------------------------------------------------------------------------
+#itemlist {
+  padding: 100px 50px 0 50px;
+  h2 {
+    margin: 0;
+    text-align: center;
+    background: linear-gradient(transparent 50%, yellow 50%);
+  }
+  .item-box {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    .item-box-inner {
+      padding-top: 25px;
+      img {
+        width: 100%;
+        border-radius: 4px;
+      }
+      a:hover {
+        opacity: 0.8;
+      }
+      p {
+        text-align: center;
+        margin: 10px 0;
+      }
+      .cart-box {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        input {
+          width: 20%;
+          margin-right: 10%;
+          border: 1px solid #000;
+        }
+        button {
+          width: 50%;
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+          outline: none;
+          padding: 0;
+          appearance: none;
+          padding: 10px 0;
+          border: 1px solid #000;
+          border-radius: 4px;
+          background-color: #fff;
+          &:hover {
+            background-color: #DEB887;
+          }
+        }
+      }
+    }
+  }
+  .btn {
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 25px;
+    border: 1px solid #000;
+    &:hover {
+      background-color: #fff;
+    }
+    a {
+      display: block;
+      color: #000;
+
+    }
+  }
+
+  @media (min-width: 550px) {
+    padding-top: 100px;
+    h2 {
+      width: 50%;
+      margin: 0 auto;
+    }
+    .item-box {
+      padding: 0 10%;
+      padding-bottom: 25px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      .item-box-inner {
+        padding-top: 50px;
+        box-sizing: border-box;
+        width: 48%;
+        text-align: center;
+        img {
+          width: 100%;
+          height: auto;
+          border-radius: 4px;
+        }
+      }
+    }
+    .btn {
+      text-align: center;
+      padding: 15px;
+      margin: 0 auto;
+      width: 30%;
+      border: 1px solid #000;
+      a {
+        color: #000;
+      }
+    }
+  }
+
+}
